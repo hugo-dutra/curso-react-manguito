@@ -1,3 +1,3 @@
 {
-  "*.{ts,tsx}": ["estlint 'src/**' --fix"]
+  "*.{ts,tsx}": ["estlint 'src/**' --fix", "npm run test:staged"]
 }
