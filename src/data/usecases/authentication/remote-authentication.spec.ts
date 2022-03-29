@@ -1,6 +1,8 @@
 import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { mockAuthentication } from "@/domain/test/mock-authentication";
 import { RemoteAuthentication } from "@/data/usecases/authentication/remote-autentication";
+import { InvalidCredentialsError } from "@/domain/errors/invalid-credentials-error";
+import { HttpStatusCode } from "@/data/protocols/http/http-response";
 
 
 type SutTypes = {
@@ -29,6 +31,14 @@ describe('RemoteAuthentication', () => {
     const authenticationParams = mockAuthentication();
     await sut.auth(authenticationParams)
     expect(httpPostClientSpy.body).toEqual(authenticationParams);
+  })
+  test('Shoud throw InvalidCredentialsError if HttpPostClient returns 401', async () => {
+    const { sut, httpPostClientSpy } = makeSut();
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.unauthorized
+    }
+    const promise = sut.auth(mockAuthentication())
+    await expect(promise).rejects.toThrow(new InvalidCredentialsError())
   })
 
 
