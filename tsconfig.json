@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": false,
     "jsx": "react",
     "rootDirs": ["src", "tests"],
+    "strict": false,
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
